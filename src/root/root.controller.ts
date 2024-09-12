@@ -5,8 +5,9 @@ export class RootController {
     @Get()
     getRoot() {
         const APP_VERSION = require('../../package.json').version;
+        const APP_NAME = require('../../package.json').name;
         return {
-            name: 'Gestão de Pessoas',
+            name: APP_NAME,
             version: APP_VERSION,
         };
     }

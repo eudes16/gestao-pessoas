@@ -15,4 +15,15 @@ describe('RootController', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
+
+
+  it('should return Api info', () => {
+    const APP_VERSION = require('../../package.json').version;
+    const APP_NAME = require('../../package.json').name;  
+
+    expect(controller.getRoot()).toEqual({
+      name: APP_NAME,
+      version: APP_VERSION,
+    });
+  });
 });

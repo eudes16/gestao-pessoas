@@ -11,6 +11,7 @@ export class UserFindByEmailUsecase implements Usecase<UserFindByEmailInput, Use
     ) {}
 
     async execute(dto: UserFindByEmailInput): Promise<UserFindByEmailOutput> {
-        return this.repository.findUserByEmail(dto.email);
+        const {password: _, ...result} = await this.repository.findUserByEmail(dto.email);
+        return result;
     }
 }

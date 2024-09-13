@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { RootModule } from './root/root.module';
 import { ConfigModule } from '@nestjs/config';
+import { UserModule } from './user/user.module';
 import configuration from './config/configuration';
 
 @Module({
@@ -8,7 +9,8 @@ import configuration from './config/configuration';
     ConfigModule.forRoot({
       load: [configuration],
     }),
-    RootModule
+    RootModule,
+    UserModule
   ],
   controllers: [],
   providers: [],

@@ -14,6 +14,7 @@ export class UserService implements Service {
     async findUserByMail(dto: UserFindByEmailInput): Promise<UserFindByEmailOutput> {
         const useCases = new UserFindByEmailUsecase(this.repository);
         const result = await useCases.execute(dto);
-        return result;
+        const { password:_, ...user } = result;
+        return user;
     }
 }

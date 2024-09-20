@@ -6,10 +6,11 @@ import { JwtService } from "@nestjs/jwt";
 import { UserFindByEmailUsecase } from "./../../../user/domain/usecases/user-find-by-email.usecase";
 import { CrudRepository } from "src/commons/crud-repository.interface";
 import { Encryt } from "src/commons/encryt";
+import { UserRepository } from "src/user/domain/input/user-repository.interface";
 
 export class LoginUsecase implements Usecase<LoginInput, LoginOutput> {
     constructor(
-        private repository: CrudRepository<any>,
+        private repository: UserRepository,
         private jwtService: JwtService,
         private encrypt: Encryt
     ) {}

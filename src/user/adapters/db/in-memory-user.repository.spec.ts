@@ -1,15 +1,16 @@
 import { Repository } from "src/commons/repository.interface";
 import { User } from "src/user/domain/entities/user.entity";
 import { InMemoryUserRepository } from "./in-memory-user.repository";
+import { UserRepository } from "src/user/domain/input/user-repository.interface";
 
 describe("InMemoryUserRepository", () => {
-    let repository: Repository<User>;
-    let users: Partial<User>[];
+    let repository: UserRepository;
+    let users: User[];
 
     beforeEach(() => {
         repository = new InMemoryUserRepository();
 
-        let users: Partial<User>[] = [
+        users  = [
             {
                 name: "User 1",
                 email: "user1@mail.com",
@@ -68,7 +69,7 @@ describe("InMemoryUserRepository", () => {
 
     describe("create", () => {
         it("should create a user", async () => {
-            const user: Partial<User> = {
+            const user: User = {
                 name: "User 4",
                 email: "user4@mail.com",
                 password: "123456",
@@ -85,10 +86,26 @@ describe("InMemoryUserRepository", () => {
 
     describe("update", () => {
         it("should update a user", async () => {
-            const user = await repository.find();
-            const result = await repository.update(user[0].id, { name: "User 1 updated" });
+            const users = await repository.find();
+
+            const user = users[0];
+
+            const result = await repository.update(user.id!, { ...user, name: "User 1 updated" });
 
             expect(result.name).toEqual("User 1 updated");
+        });
+
+        it("should throw an error when user does not exist", async () => {
+            try {
+                await repository.update(999, { 
+                    name: "User 999",
+                    email: "user999@mail.com",
+                    password: "123456",
+                    createdAt: new Date(), 
+                });
+            } catch (error) {
+                expect(error.message).toEqual("User not found");
+            }
         });
     });
 

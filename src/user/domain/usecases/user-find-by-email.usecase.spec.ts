@@ -3,10 +3,11 @@ import { UserFindByEmailInput } from "../input/user-find-by-email-input.interfac
 import { UserFindByEmailOutput } from "../output/user-find-by-email-output.interface";
 import { UserFindByEmailUsecase } from "./user-find-by-email.usecase";
 import { InMemoryUserRepository } from "./../../adapters/db/in-memory-user.repository";
+import { UserRepository } from "../input/user-repository.interface";
 
 describe("UserFindByEmailUsecase", () => {
     let usecase: UserFindByEmailUsecase;
-    let repository: InMemoryUserRepository;
+    let repository: UserRepository;
 
     beforeEach(async () => {
         const moduleRef = await Test.createTestingModule({

@@ -23,3 +23,43 @@ model User {
   updatedAt DateTime? @updatedAt
   deletedAt DateTime? @updatedAt
 }
+
+model Poeple {
+  id            Int                 @id @default(autoincrement())
+  name          String
+  gender        PoepleGender
+  birthDate     DateTime
+  maritalStatus PoepleMaritalStatus @default(single)
+  addresses     Address[]
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime?           @updatedAt
+  deletedAt     DateTime?           
+}
+
+model Address {
+  id           Int       @id @default(autoincrement())
+  zipCode      String
+  street       String
+  number       String
+  complement   String?
+  neighborhood String
+  city         String
+  state        String
+  poepleId     Int
+  poeple       Poeple    @relation(fields: [poepleId], references: [id])
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime? @updatedAt
+  deletedAt    DateTime? 
+}
+
+enum PoepleMaritalStatus {
+  single
+  married
+  divorced
+  widowed
+}
+
+enum PoepleGender {
+  male
+  female
+}

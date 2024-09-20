@@ -1,9 +1,11 @@
-import { Inject } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
 import { Prisma, PrismaClient } from "@prisma/client";
-import { CrudRepository } from "src/commons/crud-repository.interface";
 import { User } from "src/user/domain/entities/user.entity";
+import { UserRepository } from "src/user/domain/input/user-repository.interface";
 
-export class UserDbRepository implements CrudRepository<User> {
+
+@Injectable()
+export class UserDbRepository implements UserRepository {
     constructor(
         @Inject('CONNECTION') private connection: PrismaClient
     ) {}
@@ -44,7 +46,7 @@ export class UserDbRepository implements CrudRepository<User> {
 
     async create(data: User): Promise<User> {
         return await this.connection.user.create({
-            data
+            data: data as Prisma.UserCreateInput
         });
     }
 

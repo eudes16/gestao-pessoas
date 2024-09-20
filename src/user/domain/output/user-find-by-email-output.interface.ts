@@ -1,5 +1,7 @@
-export interface UserFindByEmailOutput {
-    id: number;
+import { User } from "../entities/user.entity";
+
+export interface UserFindByEmailOutput extends User{
+    id?: number;
     email: string;
     name: string;
     password?: string;

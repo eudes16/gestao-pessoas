@@ -6,17 +6,23 @@ import { UserDbRepository } from './adapters/db/user-db.repository';
 import prismaClient from 'src/commons/prisma-client';
 
 @Module({
-  providers: [
-    UserService,
-    InMemoryUserRepository,
-    UserDbRepository,
-    {
-      provide: 'CONNECTION',
-      useValue: prismaClient,
-    }
-  ],
-  controllers: [
-    UserController,
-  ],
+    providers: [
+        UserService,
+        {
+            provide: 'UserRepository',
+            useClass: InMemoryUserRepository
+        },
+        {
+            provide: 'UserRepository',
+            useClass: UserDbRepository
+        },
+        {
+            provide: 'CONNECTION',
+            useValue: prismaClient,
+        }
+    ],
+    controllers: [
+        UserController,
+    ],
 })
 export class UserModule { }

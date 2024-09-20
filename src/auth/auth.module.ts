@@ -10,7 +10,10 @@ import { Encryt } from 'src/commons/encryt';
     providers: [
         ConfigService,
         Encryt,
-        UserDbRepository,
+        {
+            provide: 'UserRepository',
+            useClass: UserDbRepository,
+        },
         {
             provide: 'CONNECTION',
             useValue: prismaClient,

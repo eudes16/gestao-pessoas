@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import configuration from './config/configuration';
 import { JwtModule } from '@nestjs/jwt';
 import { Encryt } from './commons/encryt';
+import { PoepleModule } from './poeple/poeple.module';
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import { Encryt } from './commons/encryt';
     }),
     RootModule,
     UserModule,
-    AuthModule
+    AuthModule,
+    PoepleModule
   ],
   controllers: [],
   providers: [Encryt],

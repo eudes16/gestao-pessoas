@@ -3,7 +3,7 @@ export class PoepleCreateInput {
     gender: string;
     maritalStatus: string;
     birthDate: Date;
-    address?: AddressCreateInput[];
+    addresses?: AddressCreateInput[];
 }
 
 export class AddressCreateInput {

@@ -5,8 +5,6 @@ export interface PoepleQuery extends Filter<Poeple>, Pagination {
     
 }
 
-
-
 export interface PoepleFindDto extends PoepleQuery  {
     includes?: string[];
 }

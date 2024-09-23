@@ -19,8 +19,8 @@ export class PoepleCreateUsecase {
         poeple.maritalStatus = input.maritalStatus;
         poeple.birthDate = input.birthDate;
         
-        if (input?.address?.length) {
-            poeple.address = input.address.map(address => {
+        if (input?.addresses?.length) {
+            poeple.addresses = input.addresses.map(address => {
                 const addr = new Address();
                 addr.postalCode = address.postalCode;
                 addr.number = address.number;

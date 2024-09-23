@@ -6,7 +6,7 @@ export class Poeple {
     gender: string;
     maritalStatus: string;
     birthDate: Date;
-    address?: Address[];
+    addresses?: Address[];
     createdAt?: Date;
     updatedAt?: Date;
     deletedAt?: Date;

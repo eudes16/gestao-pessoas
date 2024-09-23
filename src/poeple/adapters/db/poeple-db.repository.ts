@@ -1,4 +1,4 @@
-import { Inject, Query } from "@nestjs/common";
+import { Inject } from "@nestjs/common";
 import { PoepleGender, Prisma, PrismaClient } from "@prisma/client";
 import { NotFoundException } from "src/commons/errors/not-found.exception";
 import queryProvider from "src/commons/request/query.provider";
@@ -34,7 +34,7 @@ export class PoepleDbRepository implements PoepleRepository {
 
         const { skip, take } = pagination;
 
-        return await this.connection.poeple.findMany(
+        const result =  await this.connection.poeple.findMany(
             {
                 where,
                 take,
@@ -42,6 +42,8 @@ export class PoepleDbRepository implements PoepleRepository {
                 include,
             }
         );
+
+        return result
     }
 
     async findById(id: number): Promise<Poeple> {
@@ -61,10 +63,10 @@ export class PoepleDbRepository implements PoepleRepository {
 
         let address = [];
 
-        if (data.address?.length) {
-            address = data.address.map(address => {
+        if (data.addresses?.length) {
+            address = data.addresses.map(address => {
                 return {
-                    zipCode: address.postalCode,
+                    postalCode: address.postalCode,
                     number: address.number,
                     street: address.street,
                     complement: address.complement,
@@ -122,7 +124,7 @@ export class PoepleDbRepository implements PoepleRepository {
         const toUpdatePoeple: Prisma.PoepleUpdateInput = {
             ...fromDbPoeple,
             deletedAt: new Date(),
-            name: fromDbPoeple.name + " - DELETED",
+            name: fromDbPoeple.name,
         }
 
         const result = await this.connection.poeple.update({

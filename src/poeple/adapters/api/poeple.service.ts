@@ -9,6 +9,7 @@ import { PoepleUpdateUsecase } from "src/poeple/domain/usecases/poeple-update.us
 import { PoepleUpdateOutput } from "src/poeple/domain/output/poeple-update-output.interface";
 import { PoepleDeleteUsecase } from "src/poeple/domain/usecases/poeple-delete.usecase";
 import { PoepleDeleteOutput } from "src/poeple/domain/output/poeple-delete-output.interface";
+import responseProvider from "src/commons/response/response.provider";
 
 export class PoepleService implements Service {
     constructor (
@@ -46,24 +47,8 @@ export class PoepleService implements Service {
         const records: any = await useCase.execute(poepleFindInput);
         const count = await this.repository.count(dto);
 
-        return this.returnResolver(records, count, limit, page)
+        return responseProvider(records, count, limit, page)
     }
 
-    private returnResolver(records: any, count: number, limit: number, page: number): PoepleFindResponse {
-        const totalPages = Math.ceil(count / (limit ?? 10));
-        const currentPage = +(page ?? 1);
-        const nextPage = totalPages === currentPage ? null : +(page ?? 1) + 1;
-        const prevPage = currentPage === 1 ? null : +(page ?? 1) - 1;
-        return {
-            records,
-            pagination: {
-                totalItems: count,
-                totalPages,
-                limit: +(limit ?? 10),
-                prevPage,
-                currentPage,
-                nextPage
-            }
-        };
-    }
+    
 }

@@ -1,3 +1,5 @@
+import { Poeple } from "src/poeple/domain/entities/poeple.entity";
+
 export class Address {
     id: number;
     poepleId: number;
@@ -9,4 +11,7 @@ export class Address {
     city: string;
     state: string;
     createdAt: Date;
+    updatedAt?: Date;
+    deletedAt?: Date;
+    poeple?: Poeple
 }

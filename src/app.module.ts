@@ -7,6 +7,7 @@ import configuration from './config/configuration';
 import { JwtModule } from '@nestjs/jwt';
 import { Encryt } from './commons/encryt';
 import { PoepleModule } from './poeple/poeple.module';
+import { AddressModule } from './address/address.module';
 
 @Module({
   imports: [
@@ -21,7 +22,8 @@ import { PoepleModule } from './poeple/poeple.module';
     RootModule,
     UserModule,
     AuthModule,
-    PoepleModule
+    PoepleModule,
+    AddressModule
   ],
   controllers: [],
   providers: [Encryt],

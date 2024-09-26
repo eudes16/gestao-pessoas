@@ -8,6 +8,10 @@ import { JwtModule } from '@nestjs/jwt';
 import { Encryt } from './commons/encryt';
 import { PoepleModule } from './poeple/poeple.module';
 import { AddressModule } from './address/address.module';
+import { CepModule } from './cep/cep.module';
+import { HttpClientProvider } from './commons/http/http-client.provider';
+import axiosProvider from './commons/axios-provider';
+import axios from 'axios';
 
 @Module({
   imports: [
@@ -23,9 +27,18 @@ import { AddressModule } from './address/address.module';
     UserModule,
     AuthModule,
     PoepleModule,
-    AddressModule
+    AddressModule,
+    CepModule
   ],
   controllers: [],
-  providers: [Encryt],
+  providers: [
+    Encryt, 
+    {
+      provide: 'AXIOS_PROVIDER',
+      useFactory: () => {
+          return axiosProvider;
+      },
+    },
+  ],
 })
 export class AppModule {}

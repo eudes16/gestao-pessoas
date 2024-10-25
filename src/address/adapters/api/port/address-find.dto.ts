@@ -1,7 +1,7 @@
 import { Address } from "src/address/domain/entities/address.entity";
 import { Filter, Pagination, PaginationOutput, Response } from "src/commons/request/query.interface";
 
-export interface AddressQuery extends Filter<Omit<Address, "poeple">>, Pagination {
+export interface AddressQuery extends Filter<Omit<Address, "poeple">>, Pagination<Omit<Address, "poeple">> {
     
 }
 

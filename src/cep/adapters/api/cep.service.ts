@@ -7,7 +7,7 @@ export class CepService {
         private cepRepository: CepApiRepository
     ) {}
 
-    async findCep(cep: number): Promise<any> {
+    async findCep(cep: string): Promise<any> {
         return await this.cepRepository.findCep(cep);
     }
 }

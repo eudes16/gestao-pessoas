@@ -83,7 +83,9 @@ export default <T>(params: any) => {
         }
 
         if (key.endsWith('_lt')) {
-            where[key.replace('_lt', '')] = { lt: params[key] };
+            let value = params[key];
+
+            where[key.replace('_lt', '')] = { lt: value };
         }
 
         if (key.endsWith('_lte')) {

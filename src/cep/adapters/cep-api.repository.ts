@@ -11,7 +11,7 @@ export class CepApiRepository {
     ) {
     }
 
-    async findCep(cep: number): Promise<CepOutput> {
+    async findCep(cep: string): Promise<CepOutput> {
         const request: HttpRequest = {
             url: `/${cep}/json`,
             headers: {

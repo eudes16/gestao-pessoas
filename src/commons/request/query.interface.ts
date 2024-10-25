@@ -1,3 +1,5 @@
+import { Poeple } from "@prisma/client"
+
 export type FilterIn<T> = {
     [
         Property in keyof T as `${Lowercase<string & Property>}_in`
@@ -100,11 +102,12 @@ export type  Filter<T> = FilterIn<T> & FilterNotIn<T> & FilterLt<T> & FilterLte<
     & FilterContains<T> & FilterNotContains<T> & FilterStartsWith<T> & FilterNotStartsWith<T> & FilterEndsWith<T> 
     & FilterNotEndsWith<T> & FilterIs<T> & FilterNotIs<T> & FilterIsEmpty<T> & FilterIsSet<T> & {};
 
-export type Pagination = {
+export type Pagination<T> = {
     limit?: number;
     page?: number;
-    orderBy?: string;
-    order?: 'ASC' | 'DESC';
+    orderBy?: {
+        [Property in keyof T]?: "ASC" | "DESC"
+    };
 }
 
 export type PaginationOutput = {
